@@ -31,9 +31,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>py.edu.ucsa.ejbs</groupId>
+			<groupId>py.edu.ucsa.ejb</groupId>
 			<artifactId>torneo-dist</artifactId>
-			<version>1.0.3</version>
+			<version>1.1.3</version>
 		</dependency>
 
 		<dependency>

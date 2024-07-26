@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<display-name>torneo-web</display-name>
+	<servlet>
+		<description>
+		</description>
+		<display-name>TorneoServlet</display-name>
+		<servlet-name>TorneoServlet</servlet-name>
+		<servlet-class>py.edu.ucsa.servlet.TorneoServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TorneoServlet</servlet-name>
+		<url-pattern>/TorneoServlet</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>

@@ -1,10 +1,10 @@
 <%@ page language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<html>
-
-<%@ include file="menu.jsp" %> 
+<!DOCTYPE html>
+<html data-bs-theme="${cookie.bstheme != nul && cookie.bstheme.value != null ? cookie.bstheme.value : 'light' }">
 <head>
-	<title>Opciones</title>
+	<title>Torneo del 18 de Enero de Luque</title>
+<%@ include file="cabecera.jsp" %>
 <script>
 function cargarNuevo(){
 	document.getElementById("grillaSocioForm").submit();
@@ -19,10 +19,11 @@ function editar(id){
 
 <link rel="stylesheet" type="text/css" href="css/datatables.min.css" />
 <body>
+<%@ include file="menu.jsp" %> 
 
 <div class="container">
 
-<h1>Bienvenido a Torneo-WEB!!!!</h1>
+<h1>Bienvenido al Torneo del 18 de Enero de Luque !!!!</h1>
 
 <hr />
 
@@ -51,6 +52,7 @@ function editar(id){
 
 </div>
 
+<%@ include file="piedepagina.jsp" %>
 </body>
 
 </html>
