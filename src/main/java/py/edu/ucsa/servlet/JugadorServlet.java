@@ -53,8 +53,26 @@ public class JugadorServlet extends HttpServlet {
 			request.getSession().setAttribute("JUGADORES", jugadorList);
 
 			request.getRequestDispatcher("jugadores-listar.jsp").forward(request, response);
+		} else if ("BUSCAR".equals(request.getParameter("ACCION"))) {
+			
+			System.out.println("ACCION=BUSCAR");
+			request.getSession().setAttribute("JUGADORES", null);
+			boolean rt = true;
+			jugadorList = ejbJugador.findByNombre( request.getParameter("qnombre").trim() , rt);
+			if(jugadorList.size()>0) {
+				// EquiposDTO e =
+				request.getSession().setAttribute("JUGADORES", jugadorList);
+				
+				request.getRequestDispatcher("jugadores-listar.jsp").forward(request, response);
+			} else {
+				request.getSession().setAttribute("JUGADORES", null);
+				
+				request.getRequestDispatcher("jugadores-listar.jsp").forward(request, response);
+			}
 		} else if ("NUEVO".equals(request.getParameter("ACCION"))) {
 
+			request.getSession().setAttribute("JUGADOR", null);
+			
 			request.getRequestDispatcher("jugadores-abm.jsp").forward(request, response);
 		} else if ("EDITAR".equals(request.getParameter("ACCION"))) {
 			Integer id = Utiles.valInteger(request.getParameter("id"));

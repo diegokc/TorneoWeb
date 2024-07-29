@@ -3,21 +3,13 @@
 	<display-name>torneo-web</display-name>
 	<servlet>
 		<description>
+		 Designed and built por Diego Colman, trabajo practico de Diplomado JAVA Ucsa Modulo 3 año 2024
 		</description>
 		<display-name>TorneoServlet</display-name>
 		<servlet-name>TorneoServlet</servlet-name>
 		<servlet-class>py.edu.ucsa.servlet.TorneoServlet</servlet-class>
 	</servlet>
-	<servlet-mapping>
-		<servlet-name>TorneoServlet</servlet-name>
-		<url-pattern>/TorneoServlet</url-pattern>
-	</servlet-mapping>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

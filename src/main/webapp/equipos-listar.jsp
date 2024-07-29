@@ -15,6 +15,10 @@ function editar(id){
 function nuevoEquipo(){
 	window.location.assign("EquipoServlet?ACCION=NUEVO");
 }
+function buscarPorNombre(){
+	var q = document.getElementById("qnombre").value;
+	window.location.assign("EquipoServlet?ACCION=BUSCAR&qnombre="+q );
+}
 </script>
 </head>
 
@@ -42,14 +46,30 @@ function nuevoEquipo(){
 		
 			<c:when test="${EQUIPOS != null}">
 			
-	<form action="EquipoServlet" method="POST" id="grillamasiva" name="grillamasiva">
-	<button type="button" class="btn btn-primary" onclick="nuevoEquipo();">Agregar Equipo</button>
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar Equipos</button>			
+	 <div class="row">
+  		<div class="col">	
+  			<button type="button" class="btn btn-primary" onclick="nuevoEquipo();">Agregar Equipo</button>
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar Equipos</button>			
+		
 
-	<input type="hidden" name="ACCION" id="ACCION" value="ELIMINAR" />
-	<input type="hidden" name="msvIdExposicion" id="msvIdExposicion" value="" />
-	<input type="hidden" name="tematicaEspecifica" id="tematicaEspecifica" value="" />
+	
+ 		 </div>
+  		<div class="col">	
+  		
+			<div class="input-group mb-3">
+			  <input type="text" class="form-control" placeholder="buscar por nombre" aria-label="buscar por nombre" aria-describedby="buscar por nombre" name="qnombre" id="qnombre" />
+			  <button class="btn btn-primary" type="button" id="buscarpornombre" onclick="buscarPorNombre();" >buscar</button>
+			</div>
+
+  		</div>
+  	</div>
+	
 	<hr />
+		<form action="EquipoServlet" method="POST" id="grillamasiva" name="grillamasiva">
+					<input type="hidden" name="ACCION" id="ACCION" value="ELIMINAR" />
+			<input type="hidden" name="msvIdExposicion" id="msvIdExposicion" value="" />
+			<input type="hidden" name="tematicaEspecifica" id="tematicaEspecifica" value="" />
+			
 	<table class="table" id="tabla-opciones">
 	  <thead>
 	    <tr>
@@ -112,8 +132,30 @@ function nuevoEquipo(){
 
 	</c:when>
     <c:otherwise>
-    	<label>No tiene equipos cargados</label>
-        <button type="button" class="btn btn-primary" onclick="window.location.assign('EquipoServlet?ACCION=NUEVO');">Agregar Equipo</button>
+    
+
+        <c:choose>
+			<c:when test="${param.ACCION == 'BUSCAR'}">
+			<div class="row">
+  				<div class="col">	
+					<div class="alert alert-success" role="alert">no se ha encontrado registros</div>
+				</div>
+				<div class="col">	
+					<div class="input-group mb-3">
+					  <input type="text" class="form-control" placeholder="buscar por nombre" aria-label="buscar por nombre" aria-describedby="buscar por nombre" name="qnombre" id="qnombre" />
+					  <button class="btn btn-primary" type="button" id="buscarpornombre" onclick="buscarPorNombre();" >buscar</button>
+					  <button type="button" class="btn btn-primary" onclick="window.location.assign('EquipoServlet?ACCION=LISTAR');">volver</button>
+					</div>
+					
+				</div>
+			</div>
+			</c:when>
+    		<c:otherwise>
+                <label>No tiene equipos cargados</label>
+        		<button type="button" class="btn btn-primary" onclick="window.location.assign('EquipoServlet?ACCION=NUEVO');">Agregar Equipo</button>
+    		</c:otherwise>
+		</c:choose>
+        
     </c:otherwise>
 </c:choose>
 

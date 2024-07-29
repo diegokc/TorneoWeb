@@ -19,6 +19,10 @@ function rescindir(id){
 function nuevoJugador(){
 	window.location.assign("JugadorServlet?ACCION=NUEVO");
 }
+function buscarPorNombre(){
+	var q = document.getElementById("qnombre").value;
+	window.location.assign("JugadorServlet?ACCION=BUSCAR&qnombre="+q );
+}
 </script>
 </head>
 
@@ -52,11 +56,26 @@ function nuevoJugador(){
 		
 			<c:when test="${JUGADORES != null}">
 			
+			
+	 <div class="row">
+  		<div class="col">
+	
+			<button type="button" class="btn btn-primary" onclick="nuevoJugador();">Agregar nuevo Jugador</button>
+			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar Jugadores</button>
+		</div>
+	  		<div class="col">	
+  		
+				<div class="input-group mb-3">
+				  <input type="text" class="form-control" placeholder="buscar por nombre" aria-label="buscar por nombre" aria-describedby="buscar por nombre" name="qnombre" id="qnombre" />
+				  <button class="btn btn-primary" type="button" id="buscarpornombre" onclick="buscarPorNombre();" >buscar</button>
+				</div>
+
+  		</div>
+  	</div>
+	
+	
 	<form action="JugadorServlet" method="POST" id="grillamasiva" name="grillamasiva">
-	
-	<button type="button" class="btn btn-primary" onclick="nuevoJugador();">Agregar nuevo Jugador</button>
-	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar Jugadores</button>
-	
+		
 	<input type="hidden" name="ACCION" id="ACCION" value="ELIMINAR" />
 	<input type="hidden" name="msvIdExposicion" id="msvIdExposicion" value="" />
 	<input type="hidden" name="tematicaEspecifica" id="tematicaEspecifica" value="" />
@@ -145,8 +164,31 @@ function nuevoJugador(){
 
 	</c:when>
     <c:otherwise>
-    	<label>No tiene jugadores cargados</label>
-        <button type="button" class="btn btn-primary" onclick="nuevoJugador();">Agregar nuevo Jugador</button>
+
+        <c:choose>
+			<c:when test="${param.ACCION == 'BUSCAR'}">
+			<div class="row">
+  				<div class="col">	
+					<div class="alert alert-success" role="alert">no se ha encontrado registros</div>
+				</div>
+				<div class="col">	
+					<div class="input-group mb-3">
+					  <input type="text" class="form-control" placeholder="buscar por nombre" aria-label="buscar por nombre" aria-describedby="buscar por nombre" name="qnombre" id="qnombre" />
+					  <button class="btn btn-primary" type="button" id="buscarpornombre" onclick="buscarPorNombre();" >buscar</button>
+					  <button type="button" class="btn btn-primary" onclick="window.location.assign('JugadorServlet?ACCION=LISTAR');">volver</button>
+					</div>
+					
+				</div>
+			</div>
+			</c:when>
+    		<c:otherwise>
+    			<label>No tiene jugadores cargados</label>
+        		<button type="button" class="btn btn-primary" onclick="nuevoJugador();">Agregar nuevo Jugador</button>
+    		</c:otherwise>
+		</c:choose>
+		
+
+        
     </c:otherwise>
 </c:choose>
 

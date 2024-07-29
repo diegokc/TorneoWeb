@@ -67,25 +67,25 @@ function cancelar(){
   </div>
   
   <div class="col-sm-6 mb-3">
-    <label for="nombre" class="form-label">apellidos</label>
+    <label for="apellidos" class="form-label">apellidos</label>
     <input type="text" class="form-control" id="apellidos" aria-describedby="apellidosHelp" placeholder="" name="apellidos" value="${JUGADOR != null && JUGADOR.apellidos != null ? JUGADOR.apellidos : ''}">
     <small id="apellidosHelp" class="form-text text-muted">Ingrese los apellidos</small>
   </div>
 
   <div class="col-sm-6 mb-3">
-    <label for="nombre" class="form-label">nroFicha</label>
+    <label for="nroFicha" class="form-label">nroFicha</label>
     <input type="text" class="form-control" id="nroFicha" aria-describedby="nroFichaHelp" placeholder="" name="nroFicha" value="${JUGADOR != null && JUGADOR.nroFicha != null ? JUGADOR.nroFicha : ''}">
     <small id="nroFichaHelp" class="form-text text-muted">Ingrese la fichaNro</small>
   </div>
 
   <div class="col-sm-6 mb-3">
-    <label for="nombre" class="form-label">fechaDeNacimiento</label>
+    <label for="fechaDeNacimiento" class="form-label">fechaDeNacimiento</label>
     <input type="text" class="form-control" id="fechaDeNacimiento" aria-describedby="fechaDeNacimientoHelp" placeholder="" name="fechaDeNacimiento" value="${JUGADOR != null && JUGADOR.fechaDeNacimiento != null ? JUGADOR.fechaDeNacimiento : ''}">
     <small id="fechaDeNacimientoHelp" class="form-text text-muted">Ingrese la fechaDeNacimiento</small>
   </div>
 
   <div class="col-sm-6 mb-3">
-    <label for="nombre" class="form-label">nacionalidad</label>
+    <label for="nacionalidad" class="form-label">nacionalidad</label>
     <input type="text" class="form-control" id="nacionalidad" aria-describedby="nacionalidadHelp" placeholder="" name="nacionalidad" value="${JUGADOR != null && JUGADOR.nacionalidad != null ? JUGADOR.nacionalidad : ''}">
     <small id="nacionalidadHelp" class="form-text text-muted">Ingrese la nacionalidad</small>
   </div>
@@ -97,7 +97,7 @@ function cancelar(){
   </div>
   
   <div class="col-sm-6 mb-3">
-    <label for="nombre" class="form-label">telefono</label>
+    <label for="telefono" class="form-label">telefono</label>
     <input type="text" class="form-control" id="telefono" aria-describedby="telefonoHelp" placeholder="" name="telefono" value="${JUGADOR != null && JUGADOR.telefono != null ? JUGADOR.telefono : ''}">
     <small id="telefonoHelp" class="form-text text-muted">Ingrese el telefono</small>
   </div>

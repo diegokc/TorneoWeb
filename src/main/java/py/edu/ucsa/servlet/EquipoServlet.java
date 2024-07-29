@@ -62,8 +62,25 @@ public class EquipoServlet extends HttpServlet {
 			request.getSession().setAttribute("EQUIPOS", equipoList);
 
 			request.getRequestDispatcher("equipos-listar.jsp").forward(request, response);
+		} else if ("BUSCAR".equals(request.getParameter("ACCION"))) {
+				
+			System.out.println("ACCION=BUSCAR");
+			request.getSession().setAttribute("EQUIPOS", null);
+			boolean rt = true;
+			equipoList = ejbEquipo.findByNombre( request.getParameter("qnombre").trim() , rt);
+			if(equipoList.size()>0) {
+				// EquiposDTO e =
+				request.getSession().setAttribute("EQUIPOS", equipoList);
+				
+				request.getRequestDispatcher("equipos-listar.jsp").forward(request, response);
+			} else {
+				request.getSession().setAttribute("EQUIPOS", null);
+				
+				request.getRequestDispatcher("equipos-listar.jsp").forward(request, response);
+			}
 		} else if ("NUEVO".equals(request.getParameter("ACCION"))) {
 
+			request.getSession().setAttribute("JUGADORES", null);
 			jugadorList = ejbJugador.listar();
 			request.getSession().setAttribute("JUGADORES", jugadorList);
 			
@@ -84,6 +101,7 @@ public class EquipoServlet extends HttpServlet {
 				request.getRequestDispatcher("equipos-abm.jsp").forward(request, response);
 			}
 			
+			request.getSession().setAttribute("JUGADORES", null);
 			jugadorList = ejbJugador.listar();
 			request.getSession().setAttribute("JUGADORES", jugadorList);
 			
@@ -157,6 +175,7 @@ public class EquipoServlet extends HttpServlet {
 			//1 sacamos los jugadores marcados de la lista
 			if(!Objects.isNull(checkList)) {
 				for (int i = 0; i < checkList.length; i++) {
+					
 					String chkId = checkList[i];
 					if (chkId != null) {
 						jd = null;
@@ -164,38 +183,43 @@ public class EquipoServlet extends HttpServlet {
 						jd.setEquipo(null);
 						ejbJugador.actualizar(jd);
 					}
+					
 				}
 			}
+			int m20=20, mi20=0;
 			//2 agregamos los que si se encuentran en la lista
 			if(!Objects.isNull(hiddenIdList)) {
 				for (int i = 0; i < hiddenIdList.length; i++) {
 					String hiddenId = hiddenIdList[i];
 					if (hiddenId != null && !Utiles.tieneDato(checkList,hiddenId)) {
-						jd = null;
-						jd =  ejbJugador.getById( Integer.parseInt(hiddenId) );
-						
-						//1 verifico si el jugado es capitan en el otro equipo para limpiar el capitan
-						if(!Objects.isNull( jd.getEquipo() ) && !Objects.isNull( jd.getEquipo().getCapitan() )) {
-							if(jd.getId().equals( jd.getEquipo().getCapitan().getId() )  ) {
-								jd.getEquipo().setCapitan(null);
-								ejbEquipo.actualizar(jd.getEquipo());
-							} 
-						}
-						
-						jd.setEquipo(ed);
-						ejbJugador.actualizar(jd);
-						
-						//verifco esta seleccionado como capinta
-						
+						if(mi20<m20) {
+							jd = null;
+							jd =  ejbJugador.getById( Integer.parseInt(hiddenId) );
+							
+							//1 verifico si el jugado es capitan en el otro equipo para limpiar el capitan
+							if(!Objects.isNull( jd.getEquipo() ) && !Objects.isNull( jd.getEquipo().getCapitan() )) {
+								if(jd.getId().equals( jd.getEquipo().getCapitan().getId() )  ) {
+									jd.getEquipo().setCapitan(null);
+									ejbEquipo.actualizar(jd.getEquipo());
+								} 
+							}
+							
+							jd.setEquipo(ed);
+							ejbJugador.actualizar(jd);
+							
+							//verifco esta seleccionado como capinta
+							
 							if(!Objects.isNull(request.getParameter("capitanid"))) {
 								if( jd.getId().toString().equals( request.getParameter("capitanid").trim() ))  {
 									ed.setCapitan(jd);
 									ejbEquipo.actualizar(ed);
 								}
-							}					
+							}	
+							mi20++;
 						}
 					}
 				}
+			}
 
 			
 			response.sendRedirect("EquipoServlet?STATUS=EDIT_SUCCES&ACCION=EDITAR&id="+ed.getId());

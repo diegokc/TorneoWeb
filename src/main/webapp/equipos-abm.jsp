@@ -6,8 +6,34 @@
 	<title>Torneo del 18 de Enero de Luque - Abm Equipo</title>
 <%@ include file="cabecera.jsp" %>
 <script>
-function cargarNuevo(){
-	document.getElementById("grillaSocioForm").submit();
+function grabar(){
+	/*
+	   
+	   var inputs = document.getElementsByTagName("chjid");
+	    var inputObj;
+	  var selectedCount = 0;
+	    for(var count1 = 0;count1<inputs.length;count1++) {
+	        inputObj = inputs[count1];
+	        var type = inputObj.getAttribute("type");
+	        if (type == 'checkbox' && inputObj.checked) {
+	            selectedCount++;
+	        }
+	    }
+	  alert(selectedCount);
+	  
+	  var chjidl = document.querySelectorAll('input[name=chjid]:checked').length;
+	  var chjidl2 = document.getElementById('selected').innerHTML = getCheckBoxCount();
+	     alert(chjidl);
+	$(document).ready(function(){
+		
+			
+			var jid = $('input[name=chjid]');
+			alert(jid.length);
+    });
+	*/
+	document.getElementById("equipoabm").submit();
+	
+
 }
 function editar(id){
 	document.getElementById("ACCION").value="EDITAR";
@@ -156,7 +182,8 @@ $(document).ready(function(){
 	  
 	
 	    <div class="col-auto mb-3 text-center">
-	      <button type="submit" class="btn btn-primary">Grabar</button> <button type="button" class="btn btn-primary" onclick="javascript:cancelar();">Cancelar</button>
+	      <button type="button" class="btn btn-primary" onclick="grabar();">Grabar</button> 
+	      <button type="button" class="btn btn-primary" onclick="javascript:cancelar();">Cancelar</button>
 	    </div>
 	    
 	  </div>
